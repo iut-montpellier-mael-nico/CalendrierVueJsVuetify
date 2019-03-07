@@ -3,14 +3,9 @@
     <v-navigation-drawer app clipped fixed v-model="drawer">
       <v-list dense>
         <v-list-tile v-if="!isConnect">
-          <v-list-tile-action>
-            <v-icon>book</v-icon>
-          </v-list-tile-action>
-          <v-list-tile-content>
-            <v-list-tile-title>
               <v-dialog max-width="600px" persistent v-model="dialogRegister">
                 <template v-slot:activator="{ on }">
-                  <v-btn color="primary" dark v-on="on" >S'enregistrer</v-btn>
+                  <v-btn color="primary" dark v-on="on" ><v-icon>power</v-icon>S'enregistrer</v-btn>
                 </template>
                 <v-card>
                   <v-card-title>
@@ -54,14 +49,11 @@
                   </v-card-actions>
                 </v-card>
               </v-dialog>
-            </v-list-tile-title>
-          </v-list-tile-content>
         </v-list-tile>
         <v-list-tile v-if="!isConnect">
-            <v-list-tile-title>
               <v-dialog max-width="600px" persistent v-model="dialogConnect">
                 <template v-slot:activator="{ on }">
-                  <v-btn color="primary" dark v-on="on">Se connecter</v-btn>
+                  <v-btn color="primary" dark v-on="on"><v-icon>power</v-icon>Se connecter</v-btn>
                 </template>
                 <v-card>
                   <v-card-title>
@@ -103,13 +95,12 @@
                   </v-card-actions>
                 </v-card>
               </v-dialog>
-            </v-list-tile-title>
         </v-list-tile>
           <v-list-tile v-if="isConnect">
-              <v-btn color="primary" dark v-on="on" @click="deconnect"><v-icon>add</v-icon>Se déconnecter</v-btn>
+              <v-btn color="primary" dark v-on="on" @click="deconnect"><v-icon>power-standby</v-icon>Se déconnecter</v-btn>
           </v-list-tile>
-        <v-list-tile v-if="isConnect" @click="testClick">
-            <v-btn><v-icon>add_circle</v-icon>&nbsp;Ajouter un evènement</v-btn>
+        <v-list-tile v-if="isConnect">
+          <router-link to="/event/add"><v-btn><v-icon>add_circle</v-icon>&nbsp;Ajouter un evènement</v-btn></router-link>
         </v-list-tile>
       </v-list>
     </v-navigation-drawer>
@@ -185,9 +176,6 @@ export default {
       deconnect() {
         this.isConnect = false;
         sessionStorage.clear();
-      },
-      testClick(){
-        console.log("J ai appute ");
       }
   }
 };
