@@ -22,11 +22,10 @@ export default new Router({
       component: () =>
         import(/* webpackChunkName: "about" */ "./views/About.vue")
     },
-      {
-        path: "/calendrier",
-          name: "calendrier",
-          component: Calendrier
-      }
-
+    {
+      path: "/calendrier",
+      name: "calendrier",
+      component: Calendrier
+    }
   ]
 });
