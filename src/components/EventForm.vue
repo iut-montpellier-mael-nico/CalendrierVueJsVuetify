@@ -1,6 +1,5 @@
 <template>
     <v-app dark id="inspire">
-    <nava></nava>
     <v-content>
         <v-container fill-height>
             <v-layout align-center justify-center>
@@ -10,24 +9,17 @@
                         lazy-validation
                 >
                     <v-text-field
-                            v-model="name"
-                            :counter="10"
-                            :rules="nameRules"
-                            label="Name"
+                            v-model="title"
+                            :rules="titleRules"
+                            label="Nom de l'évènement"
                             required
                     ></v-text-field>
 
-                    <v-text-field
-                            v-model="email"
-                            :rules="emailRules"
-                            label="E-mail"
-                            required
-                    ></v-text-field>
 
                     <v-text-field
-                            v-model="email"
-                            :rules="emailRules"
-                            label="E-mail"
+                            v-model="description"
+                            :rules="descRules"
+                            label="Description de l'event"
                             required
                     ></v-text-field>
 
@@ -39,13 +31,6 @@
                             required
                     ></v-select>
 
-                    <v-checkbox
-                            v-model="checkbox"
-                            :rules="[v => !!v || 'You must agree to continue!']"
-                            label="Do you agree?"
-                            required
-                    ></v-checkbox>
-
                     <v-btn
                             :disabled="!valid"
                             color="success"
@@ -54,19 +39,6 @@
                         Validate
                     </v-btn>
 
-                    <v-btn
-                            color="error"
-                            @click="reset"
-                    >
-                        Reset Form
-                    </v-btn>
-
-                    <v-btn
-                            color="warning"
-                            @click="resetValidation"
-                    >
-                        Reset Validation
-                    </v-btn>
                 </v-form>
             </v-layout>
         </v-container>
@@ -76,21 +48,18 @@
 </template>
 
 <script>
-    import nava from "./navBar.vue";
+    import {addUnEvent} from "../../helpers/apiHelper"
     export default {
         name: "EventForm",
-        components: {nava},
         data: () => ({
             valid: true,
-            name: '',
-            nameRules: [
-                v => !!v || 'Name is required',
-                v => (v && v.length <= 10) || 'Name must be less than 10 characters'
+            title: '',
+            titleRules: [
+                v => !!v || 'Le nom est requis',
             ],
-            email: '',
-            emailRules: [
-                v => !!v || 'E-mail is required',
-                v => /.+@.+/.test(v) || 'E-mail must be valid'
+            description: '',
+            descRules: [
+                v => !!v || 'La description est requise',
             ],
             select: null,
             items: [
@@ -98,14 +67,15 @@
                 'Item 2',
                 'Item 3',
                 'Item 4'
-            ],
-            checkbox: false
+            ]
         }),
 
         methods: {
             validate () {
                 if (this.$refs.form.validate()) {
-                    this.snackbar = true
+                    var id = this.generateIdEvent();
+                    console.log(id, this.title, this.description, sessionStorage.getItem("idUser"));
+                    addUnEvent()
                 }
             },
             reset () {
@@ -113,6 +83,9 @@
             },
             resetValidation () {
                 this.$refs.form.resetValidation()
+            },
+            generateIdEvent() {
+                return Math.round(Math.random()*(600-1)+1);
             }
         }
     }

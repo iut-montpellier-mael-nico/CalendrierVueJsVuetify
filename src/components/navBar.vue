@@ -107,7 +107,7 @@
     <v-toolbar app clipped-left color="blue" dense fixed>
         <v-toolbar-side-icon @click.stop="drawer = !drawer"></v-toolbar-side-icon>
         <v-toolbar-title class="mr-5 align-center">
-            <span class="title">Calendrier</span>
+            <span class="title">Calendrier by Mael & Nico</span>
         </v-toolbar-title>
         <v-spacer></v-spacer>
     </v-toolbar>
