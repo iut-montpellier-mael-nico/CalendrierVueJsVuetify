@@ -23,14 +23,68 @@
                             required
                     ></v-text-field>
 
-                    <v-select
-                            v-model="select"
-                            :items="items"
-                            :rules="[v => !!v || 'Item is required']"
-                            label="Item"
-                            required
-                    ></v-select>
-
+                    <v-layout row wrap>
+                            <span>Date début :</span>
+                            <v-menu
+                                    ref="menu"
+                                    v-model="menu"
+                                    :close-on-content-click="false"
+                                    :nudge-right="40"
+                                    :return-value.sync="dateDebut"
+                                    lazy
+                                    transition="scale-transition"
+                                    offset-y
+                                    full-width
+                                    min-width="450px"
+                            >
+                                <template v-slot:activator="{ on }">
+                                    <v-text-field
+                                            v-model="dateDebut"
+                                            label="Picker in menu"
+                                            prepend-icon="event"
+                                            readonly
+                                            v-on="on"
+                                    ></v-text-field>
+                                </template>
+                                <v-date-picker v-model="dateDebut" no-title scrollable>
+                                    <v-spacer></v-spacer>
+                                    <v-btn flat color="primary" @click="menu = false">Cancel</v-btn>
+                                    <v-btn flat color="primary" @click="$refs.menu.save(dateDebut)">OK</v-btn>
+                                </v-date-picker>
+                            </v-menu>
+                        <v-spacer></v-spacer>
+                    </v-layout>
+                    <v-layout row wrap>
+                            <span>Date de fin :</span>
+                            <v-menu
+                                    ref="menu2"
+                                    v-model="menu2"
+                                    :close-on-content-click="false"
+                                    :nudge-right="40"
+                                    :return-value.sync="dateFin"
+                                    lazy
+                                    transition="scale-transition"
+                                    offset-y
+                                    full-width
+                                    min-width="450px"
+                            >
+                                <template v-slot:activator="{ on }">
+                                    <v-text-field
+                                            v-model="dateFin"
+                                            label="Picker in menu"
+                                            prepend-icon="event"
+                                            readonly
+                                            v-on="on"
+                                    ></v-text-field>
+                                </template>
+                                <v-date-picker v-model="dateFin" no-title scrollable>
+                                    <v-spacer></v-spacer>
+                                    <v-btn flat color="primary" @click="menu2 = false">Cancel</v-btn>
+                                    <v-btn flat color="primary" @click="$refs.menu2.save(dateFin)">OK</v-btn>
+                                </v-date-picker>
+                            </v-menu>
+                        <v-spacer></v-spacer>
+                    </v-layout>
                     <v-btn
                             :disabled="!valid"
                             color="success"
@@ -48,7 +102,8 @@
 </template>
 
 <script>
-    import {addUnEvent} from "../../helpers/apiHelper"
+    import {addUnEvent} from "../../helpers/apiHelper";
+    import router from "../router";
     export default {
         name: "EventForm",
         data: () => ({
@@ -61,21 +116,20 @@
             descRules: [
                 v => !!v || 'La description est requise',
             ],
-            select: null,
-            items: [
-                'Item 1',
-                'Item 2',
-                'Item 3',
-                'Item 4'
-            ]
+            dateDebut: new Date().toISOString().substr(0, 10),
+            menu: false,
+            menu2: false,
+            dateFin : new Date().toISOString().substr(0, 10),
         }),
 
         methods: {
             validate () {
                 if (this.$refs.form.validate()) {
                     var id = this.generateIdEvent();
-                    console.log(id, this.title, this.description, sessionStorage.getItem("idUser"));
-                    addUnEvent()
+                    console.log(id, this.title,this.dateDebut, this.dateFin,this.description,sessionStorage.getItem("idUser"));
+                    addUnEvent(id, this.title,this.dateDebut, this.dateFin,this.description,sessionStorage.getItem("idUser"));
+                    this.reset();
+                    router.push("/")
                 }
             },
             reset () {

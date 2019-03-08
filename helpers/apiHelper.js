@@ -18,21 +18,32 @@ export const addUnEvent = (
       description: description,
       idUser: idUser
     },
-    { withCredentials: true }
-  );
+    { withCredentials: true }, {
+          headers: {
+              'Authorization': 'Bearer' + sessionStorage.getItem("jwt"),
+              'Content-Type': 'application/x-www-form-urlencoded'
+          }
+    });
 };
 export const deleteUnEvent = idEvent => {
   return axios.post(
-    "http://localhost:5000/private/deleteEvent",
-    {
-      idEvent: idEvent
-    },
-    { withCredentials: true }
-  );
+    "http://localhost:5000/private/deleteEvent", {idEvent: idEvent},{ withCredentials: true }, {
+          headers: {
+              'Authorization': 'Bearer' + sessionStorage.getItem("jwt"),
+              'Content-Type': 'application/x-www-form-urlencoded'
+          }
+      });
 };
 
 export const getUnEvent = () => {};
-export const getAllEvents = () => {};
+export const getAllEvents = () => {
+    return axios.post("http://localhost:5000/private/mesEvents",{idUser: sessionStorage.getItem("idUser")}, {withCredentials: true}, {
+        headers: {
+            'Authorization': 'Bearer' + sessionStorage.getItem("jwt"),
+            'Content-Type': 'application/x-www-form-urlencoded'
+        }
+});
+}
 
 export const createUser = (email, pass) => {
   return axios
