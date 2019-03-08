@@ -1,4 +1,17 @@
-# calendriervuejsvuetify
+# Calendar - VueJS
+
+# Foobar
+
+Visuel de l'application calendrier en vueJS qui s'interface avec l'api en nodeJS.
+
+## Utilisation de l'application
+
+Les routes disponibles pour l'application sont :
+- une fenêtre modale pour la connexion, et l'enregistrement sur l'application
+- /event/add qui permet d'ajouter un évènement
+- lors d'un clic sur un évènement, son détail s'affiche dans une modal.
+- la supression d'un évènement s'effectue aussi dans la modal de détail.
+
 
 ## Project setup
 ```
@@ -35,5 +48,8 @@ npm run test:e2e
 npm run test:unit
 ```
 
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+
+## Auteurs
+* Maël Baron
+* Nicolas Guitard
+
