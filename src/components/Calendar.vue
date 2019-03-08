@@ -77,10 +77,10 @@
         computed: {
             // convert the list of events into a map of lists keyed by date
             eventsMap () {
-                //const map = {}
-                //this.events.forEach(e => (map[e.date] = map[e.date] || []).push(e))
-                return getAllEvents.forEach(e=> console.log(e))
-                //return map
+                const map = {}
+                this.events.forEach(e => (map[e.date] = map[e.date] || []).push(e))
+                //return getAllEvents.forEach(e=> console.log(e))
+                return map
             }
         },
         methods: {
