@@ -102,6 +102,9 @@
         <v-list-tile v-if="isConnect">
           <router-link to="/event/add"><v-btn><v-icon>add_circle</v-icon>&nbsp;Ajouter un evènement</v-btn></router-link>
         </v-list-tile>
+        <v-list-tile v-if="isConnect">
+          <router-link to="/listEvents"><v-btn><v-icon>list</v-icon>&nbsp;Lister les évènements</v-btn></router-link>
+        </v-list-tile>
       </v-list>
     </v-navigation-drawer>
     <v-toolbar app clipped-left color="blue" dense fixed>
@@ -111,7 +114,6 @@
       </v-toolbar-title>
       <v-spacer></v-spacer>
     </v-toolbar>
-    <nava></nava>
     <v-content>
       <v-container fill-height>
         <v-layout align-center justify-center>

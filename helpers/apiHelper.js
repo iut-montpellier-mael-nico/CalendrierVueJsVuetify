@@ -25,7 +25,7 @@ export const addUnEvent = (
           }
     });
 };
-export const deleteUnEvent = idEvent => {
+export const deleteUnEvent = (idEvent) => {
   return axios.post(
     "http://localhost:5000/private/deleteEvent", {idEvent: idEvent},{ withCredentials: true }, {
           headers: {
@@ -42,8 +42,16 @@ export const getAllEvents = () => {
             'Authorization': 'Bearer' + sessionStorage.getItem("jwt"),
             'Content-Type': 'application/x-www-form-urlencoded'
         }
-});
-}
+})
+        .then(function(response){
+            console.log(response);
+            return response.data
+        })
+        .catch(function (error) {
+            console.error(error);
+            return error;
+        })
+};
 
 export const createUser = (email, pass) => {
   return axios

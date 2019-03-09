@@ -1,8 +1,7 @@
 # Calendar - VueJS
 
-# Foobar
-
 Visuel de l'application calendrier en vueJS qui s'interface avec l'api en nodeJS.
+L'application utilise material design, vuetify, et axios
 
 ## Utilisation de l'application
 
@@ -11,7 +10,6 @@ Les routes disponibles pour l'application sont :
 - /event/add qui permet d'ajouter un évènement
 - lors d'un clic sur un évènement, son détail s'affiche dans une modal.
 - la supression d'un évènement s'effectue aussi dans la modal de détail.
-
 
 ## Project setup
 ```
