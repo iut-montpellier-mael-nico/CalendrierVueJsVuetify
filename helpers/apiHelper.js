@@ -9,7 +9,7 @@ export const addUnEvent = (
   idUser
 ) => {
   return axios.post(
-    "http://localhost:5000/private/addEvent",
+    "http://baron-guitard-calendrierapi.herokuapp.com/private/addEvent",
     {
       idEvent: idEvent,
       title: title,
@@ -27,7 +27,7 @@ export const addUnEvent = (
 };
 export const deleteUnEvent = (idEvent) => {
   return axios.post(
-    "http://localhost:5000/private/deleteEvent", {idEvent: idEvent},{ withCredentials: true }, {
+    "http://baron-guitard-calendrierapi.herokuapp.com/private/deleteEvent", {idEvent: idEvent},{ withCredentials: true }, {
           headers: {
               'Authorization': 'Bearer' + sessionStorage.getItem("jwt"),
               'Content-Type': 'application/x-www-form-urlencoded'
@@ -37,7 +37,7 @@ export const deleteUnEvent = (idEvent) => {
 
 export const getUnEvent = () => {};
 export const getAllEvents = () => {
-    return axios.post("http://localhost:5000/private/mesEvents",{idUser: sessionStorage.getItem("idUser")}, {withCredentials: true}, {
+    return axios.post("http://baron-guitard-calendrierapi.herokuapp.com/private/mesEvents",{idUser: sessionStorage.getItem("idUser")}, {withCredentials: true}, {
         headers: {
             'Authorization': 'Bearer' + sessionStorage.getItem("jwt"),
             'Content-Type': 'application/x-www-form-urlencoded'
@@ -56,7 +56,7 @@ export const getAllEvents = () => {
 export const createUser = (email, pass) => {
   return axios
     .post(
-      "http://localhost:5000/register",
+      "http://baron-guitard-calendrierapi.herokuapp.com/register",
       {
         mail: email,
         password: pass
@@ -75,7 +75,7 @@ export const createUser = (email, pass) => {
 export const seConnecter = (email, pass) => {
   return axios
     .post(
-      "http://localhost:5000/login",
+      "http://baron-guitard-calendrierapi.herokuapp.com/login",
       {
         mail: email,
         password: pass
