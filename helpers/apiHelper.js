@@ -32,10 +32,32 @@ export const deleteUnEvent = (idEvent) => {
               'Authorization': 'Bearer' + sessionStorage.getItem("jwt"),
               'Content-Type': 'application/x-www-form-urlencoded'
           }
-      });
+      })
+      .then(function(response){
+          console.log(response);
+          return response
+      })
+      .catch(function (error) {
+          console.error(error);
+          return error;
+      })
 };
 
-export const getUnEvent = () => {};
+export const getUnEvent = (idEvent) => {return axios.post(
+    "http://baron-guitard-calendrierapi.herokuapp.com/private/monEvent", {idEvent: idEvent},{ withCredentials: true }, {
+        headers: {
+            'Authorization': 'Bearer' + sessionStorage.getItem("jwt"),
+            'Content-Type': 'application/x-www-form-urlencoded'
+        }
+    })
+    .then(function(response){
+        console.log(response);
+        return response
+    })
+    .catch(function (error) {
+        console.error(error);
+        return error;
+    })};
 export const getAllEvents = () => {
     return axios.post("http://baron-guitard-calendrierapi.herokuapp.com/private/mesEvents",{idUser: sessionStorage.getItem("idUser")}, {withCredentials: true}, {
         headers: {

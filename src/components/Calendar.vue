@@ -54,18 +54,16 @@
         data: () => ({
             today: "",
             events: [{
-                title: 'Vacation',
-                details: 'Going to the beach!',
+                title: 'Test',
+                details: 'Ici on affiche le detail de l event',
                 date: '2019-03-09',
                 open: false
             }]
         }),
         computed: {
-            // convert the list of events into a map of lists keyed by date
             eventsMap() {
                 const map = {};
                 this.events.forEach(e => (map[e.date] = map[e.date] || []).push(e));
-                //return getAllEvents.forEach(e=> console.log(e))
                 return map;
             }
         },
@@ -79,6 +77,7 @@
             },
             getEvents() {
                 return this.events
+                //this.events = getAllEvents
             },
             refresh() {
                 setTimeout(this.getEvents, 300);
